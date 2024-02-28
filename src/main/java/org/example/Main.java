@@ -14,7 +14,7 @@ public class Main {
         writeFileContents("newfile.md", 200);
         Backup backup = new Backup("newfile.md");
         System.out.println(backup.backup("./backup", false));
-        Tree.print();
+        System.out.println(Tree.print(new File(".")));
     }
 
     /**

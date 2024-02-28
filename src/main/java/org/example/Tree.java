@@ -2,30 +2,45 @@ package org.example;
 
 import java.io.File;
 
+/**
+ * Класс формирует графическое древо директорий и файлов
+ */
 public class Tree {
 
+    private static String result = "";
 
-    public static void print(){
-        constructTree(new File("."), "", true);
+    /**
+     * Получить дерево директорий и файлов
+     * @param root
+     * @return tree to string
+     */
+    public static String print(File root){
+        return constructTree(root, "", true);
     }
 
-    public static void constructTree(File file, String indent, boolean isLast){
-        System.out.print(indent);
+    /**
+     * Получить дерево директорий и файлов
+     * @param file
+     * @param indent
+     * @param isLast
+     * @return tree to string
+     */
+    private static String constructTree(File file, String indent, boolean isLast){
+        result += indent;
         if (isLast){
-            System.out.print("└─");
+            result += "└─";
             indent += "  ";
         }
         else {
-            System.out.print("├─");
+            result += "└─";
             indent += "│ ";
         }
 
         File[] files = file.listFiles();
         if (files == null)
-            return;
+            return "";
 
-        System.out.print(file.getName() + " : " + printFileList(files));
-        System.out.println();
+        result += file.getName() + " : " + printFileList(files) + '\n'; //
 
         int subDirTotal = 0;
         for (int i = 0; i < files.length; i++){
@@ -42,8 +57,15 @@ public class Tree {
                 constructTree(files[i], indent, subDirTotal == ++subDirCounter);
             }
         }
+
+        return result;
     }
 
+    /**
+     * Возвращает все файлы из listFiles
+     * @param files
+     * @return files
+     */
     private static String printFileList(File[] files){
         String filesStr = "";
         for (File f : files) {
