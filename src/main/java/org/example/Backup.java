@@ -11,6 +11,12 @@ public class Backup {
         this.dirFromBackup = dirFromBackup;
     }
 
+    /**
+     * Метод для копирования файлов в указанную директорию
+     * @param backUpFolder
+     * @param isOverride если true - будет происходить перезапись файла, что уже был скопирован в ту же директорию с тем же именем, елси false - будет создана новая отдельная папка
+     * @return isSuccess
+     */
     public boolean backup(String backUpFolder, boolean isOverride){
         try(FileInputStream FROM = new FileInputStream(dirFromBackup)){
             File backUpFile;
